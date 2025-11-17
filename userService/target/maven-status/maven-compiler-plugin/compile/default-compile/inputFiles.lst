@@ -1,0 +1,12 @@
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/model/MembershipType.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/repository/UserRepository.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/model/MembershipStatus.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/serviceImpl/UserServiceImpl.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/service/UserService.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/controller/UserController.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/model/User.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/exception/ErrorResponse.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/exception/GlobalExceptionHandler.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/UserServiceApplication.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/exception/ResourceNotFoundException.java
+/workspaces/libraryManagementMicroservice/userService/src/main/java/com/library/user/model/UserDto.java
