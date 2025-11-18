@@ -88,12 +88,21 @@ import java.util.Map;
  * ✅ Readable - Methods look like regular Java calls
  * ✅ Maintainable - Changes are simple and clear
  * ✅ Spring Integration - Works seamlessly with Spring Boot
- * 
+/**
  * @FeignClient - Spring Cloud annotation
- * name = Client identifier (for logging/metrics)
- * url = User Service base URL
+ * name = Service name in Eureka (matches spring.application.name in User Service)
+ *
+ * 🎯 Service Discovery Integration:
+ * Instead of hardcoded URL (http://localhost:8081), we use service name.
+ * Eureka automatically resolves "user-service" to actual instance(s).
+ *
+ * Benefits:
+ * ✅ Dynamic discovery - No hardcoded URLs
+ * ✅ Load balancing - Automatically distributes load across instances
+ * ✅ Resilience - Automatically routes to healthy instances
+ * ✅ Scalability - Add/remove instances without code changes
  */
-@FeignClient(name = "user-service", url = "http://localhost:8081")
+@FeignClient(name = "user-service")
 public interface UserServiceClient {
 
     /**
@@ -158,4 +167,6 @@ public interface UserServiceClient {
      */
     @GetMapping("/api/users/{id}")
     Map<String, Object> getUserDetails(@PathVariable("id") Long userId);
+
+
 }

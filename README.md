@@ -10,59 +10,87 @@
 
 ### **📚 Read the documentation in this order:**
 
-1. **[INDEX.md](./INDEX.md)** - Complete navigation guide ⭐ START HERE
-2. **[PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md)** - What we built and how to run it
-3. **[SOLID_PRINCIPLES_GUIDE.md](./SOLID_PRINCIPLES_GUIDE.md)** - Learn SOLID with examples
-4. **[BOOK_SERVICE_IMPROVEMENTS.md](./BOOK_SERVICE_IMPROVEMENTS.md)** - Refactoring guide
-5. **[MICROSERVICES_INTEGRATION_GUIDE.md](./MICROSERVICES_INTEGRATION_GUIDE.md)** - Connect services
-6. **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** - Cheat sheet (keep handy!)
-7. **[ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md)** - Visual guide
+1. **[QUICK_START_EUREKA.md](./QUICK_START_EUREKA.md)** - Start services with Eureka ⭐ **NEW!**
+2. **[INDEX.md](./INDEX.md)** - Complete navigation guide
+3. **[PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md)** - What we built and how to run it
+4. **[EUREKA_SETUP_GUIDE.md](./EUREKA_SETUP_GUIDE.md)** - Service Discovery setup ⭐ **NEW!**
+5. **[SOLID_PRINCIPLES_GUIDE.md](./SOLID_PRINCIPLES_GUIDE.md)** - Learn SOLID with examples
+6. **[BOOK_SERVICE_IMPROVEMENTS.md](./BOOK_SERVICE_IMPROVEMENTS.md)** - Refactoring guide
+7. **[MICROSERVICES_INTEGRATION_GUIDE.md](./MICROSERVICES_INTEGRATION_GUIDE.md)** - Connect services
+8. **[FEIGN_CLIENT_GUIDE.md](./FEIGN_CLIENT_GUIDE.md)** - Declarative REST clients
+9. **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** - Cheat sheet (keep handy!)
+10. **[ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md)** - Visual guide
 
 ---
 
 ## 🎯 What You'll Build
 
-Two microservices that work together:
+Three microservices with service discovery:
 
 ```
-┌─────────────────┐         ┌─────────────────┐
-│  Book Service   │◄───────►│  User Service   │
-│  Port: 8080     │  REST   │  Port: 8081     │
-│  library_db     │   API   │  user_db        │
-└─────────────────┘         └─────────────────┘
+        ┌─────────────────────────┐
+        │   Eureka Server         │
+        │   Port: 8761            │
+        │   Service Registry      │
+        └───────────┬─────────────┘
+                    │
+        ┌───────────┴────────────┐
+        │                        │
+┌───────▼─────────┐      ┌──────▼──────────┐
+│  Book Service   │      │  User Service   │
+│  Port: 8080     │◄────►│  Port: 8081     │
+│  library_db     │ Feign│  library_db     │
+└─────────────────┘      └─────────────────┘
 ```
 
 **Features:**
 - ✅ User registration & membership management
 - ✅ Book inventory management
 - ✅ Borrow/Return with validation
-- ✅ Inter-service communication
+- ✅ **Service Discovery with Netflix Eureka**
+- ✅ **Dynamic inter-service communication**
+- ✅ **Load balancing ready**
 - ✅ SOLID principles applied throughout
 - ✅ Production-ready code structure
 
 ---
 
-## ⚡ Quick Start (2 minutes)
+## ⚡ Quick Start
 
-### **1. Start User Service**
+### **Option 1: Automated Startup (Recommended)**
 ```bash
-cd /home/devel-rajkumar/java/userService
+cd /Users/raj/IdeaProjects/libraryManagementMicroservice
+./start-all-services-with-eureka.sh
+```
+This starts all services in the correct order. Press Ctrl+C to stop all.
+
+### **Option 2: Manual Startup**
+
+### **1. Start Eureka Server** (Terminal 1)
+```bash
+cd /Users/raj/IdeaProjects/libraryManagementMicroservice/eureka-server
+mvn spring-boot:run
+```
+**Access Dashboard**: http://localhost:8761
+
+### **2. Start User Service** (Terminal 2)
+```bash
+cd /Users/raj/IdeaProjects/libraryManagementMicroservice/userService
 mvn spring-boot:run
 ```
 
-### **2. Start Book Service** (New terminal)
+### **3. Start Book Service** (Terminal 3)
 ```bash
-cd /home/devel-rajkumar/java/springBootPracticeAssignment?/demo
+cd /Users/raj/IdeaProjects/libraryManagementMicroservice/bookService/demo
 mvn spring-boot:run
 ```
 
-### **3. Test**
-```bash
-curl http://localhost:8081/api/users/health
-curl http://localhost:8080/api/books/health
-```
+### **4. Verify**
+- **Eureka Dashboard**: http://localhost:8761 - Should show BOOK-SERVICE and USER-SERVICE as UP
+- **Book Service**: http://localhost:8080/api/books
+- **User Service**: http://localhost:8081/api/users
 
-✅ If you see `{"status":"UP"}`, you're good to go!
+✅ See **[QUICK_START_EUREKA.md](./QUICK_START_EUREKA.md)** for detailed testing guide!
 
 ---
 
